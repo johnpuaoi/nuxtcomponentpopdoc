@@ -9,7 +9,7 @@ export function activate(context: vscode.ExtensionContext) {
   // Use the console to output diagnostic information (console.log) and errors (console.error)
   // This line of code will only be executed once when your extension is activated
   console.log('Nuxt Pop Doc Activated');
-  // Register new hover provider when hovering over javascript, typescript or html files.
+  // Add subscriptions
   context.subscriptions.push(hoverProvider());
 }
 

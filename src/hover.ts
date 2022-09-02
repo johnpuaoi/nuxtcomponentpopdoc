@@ -6,12 +6,15 @@ export const hoverProvider = () => {
       // Only get the word if the word sits between <> or </> tags.
       const wordRange = document.getWordRangeAtPosition(position, /<[^>]*>/);
 
+      // If the wordRange is null, then the word is not between <> or </> tags.
       if (!wordRange) {
         return;
       }
 
-      const word = document.getText(wordRange);
+      // Get the word from the wordRange.
+      const word = wordRange ? document.getText(wordRange) : null;
 
+      // If the word is null, then return.
       if (!word) {
         return;
       }
@@ -27,8 +30,9 @@ export const hoverProvider = () => {
       // : typeof import('../components/Auth/Login.vue')['default'];
       // JBadge: typeof import('../node_modules/@johnpuaoi/jptechcomponents/lib/components/Badge.vue')['default'];
 
+      // .findFiles is not set in extension.ts so that new vers of components.d.ts can be used when it is updated.
       return vscode.workspace
-        .findFiles('.nuxt/components.d.ts')
+        .findFiles('.nuxt/components.d.ts', '**/node_modules/**', 1)
         .then((files) => {
           // Get the first file.
           const file = files[0];
@@ -56,7 +60,7 @@ export const hoverProvider = () => {
             console.log('Path With Wildcards: ', pathWithWildCards);
 
             return vscode.workspace
-              .findFiles(pathWithWildCards)
+              .findFiles(pathWithWildCards, null, 1)
               .then((files) => {
                 // Get the first file
                 const file = files[0];
