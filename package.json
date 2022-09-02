@@ -2,7 +2,7 @@
   "name": "nuxtcomponentpopdoc",
   "displayName": "NuxtComponentPopDoc",
   "description": "Add popup documentation for Nuxt components when hovering over them.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.70.0"
   },
@@ -14,7 +14,18 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": []
+    "commands": [
+      {
+        "command": "nuxtcomponentpopdoc.createPopDocComment",
+        "title": "Create PopDoc Comment"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "nuxtcomponentpopdoc.createPopDocComment",
+        "key": "<pd"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",
