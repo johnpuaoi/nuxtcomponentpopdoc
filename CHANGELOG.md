@@ -4,6 +4,14 @@ All notable changes to the "nuxtcomponentpopdoc" extension will be documented in
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [Unreleased]
+## [1.0 Release]
 
-- Initial release 0.0.2
+- Bugfix: If component has props or the rest of the component block continues on another line, the pop doc will now show. <br> <br>
+    ```html
+    <!-- Now Works -->
+    <MyComponent 
+    v-model="data"
+    prop="propValue"
+    />
+    ``` 
+- Support for `<kebab-case-component></kebab-case-component>`
