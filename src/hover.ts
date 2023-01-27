@@ -3,8 +3,17 @@ import * as vscode from 'vscode';
 export const hoverProvider = () => {
   return vscode.languages.registerHoverProvider([{ language: 'vue' }], {
     provideHover(document, position, token) {
-      // Only get the word if the word sits between <> or </> tags.
-      const wordRange = document.getWordRangeAtPosition(position, /<[^>]*>/);
+      // Only get the word if the word sits between <>, </> tags or if the word has < or </ in front of it.
+      // const wordRange = document.getWordRangeAtPosition(
+      //   position,
+      //   /<[^>]*>|<\/[^>]*>|<[^>]*|<\/[^>]*|[^>]*>/
+      // );
+      const wordRange = document.getWordRangeAtPosition(
+        position,
+        /<[a-zA-Z-]+([a-zA-Z0-9-]*[a-zA-Z0-9])*(\s+[a-zA-Z-]+=[^>]+)?\s*(\/|>)?|<\/[a-zA-Z-]+([a-zA-Z0-9-]*[a-zA-Z0-9])*\s*>/
+      );
+
+      console.log('Word Range: ', wordRange);
 
       // If the wordRange is null, then the word is not between <> or </> tags.
       if (!wordRange) {
@@ -23,9 +32,28 @@ export const hoverProvider = () => {
       // Remove anything else after the first space in the word.
       const wordWithoutSpace = word.split(' ')[0];
       // Remove < > / from word.
-      const wordWithoutTags = wordWithoutSpace.replace(/<|>|\/|/g, '');
+      let wordWithoutTags = wordWithoutSpace.replace(/<|>|\/|/g, '');
 
-      console.log('Word without tags: ', wordWithoutTags);
+      // If wordWithoutTags has -, remove any - and turn the character after it to uppercase.
+      if (wordWithoutTags.includes('-')) {
+        const wordWithoutTagsArray = wordWithoutTags.split('-');
+        const wordWithoutTagsArrayWithUpperCase = wordWithoutTagsArray.map(
+          (word, index) => {
+            if (index !== 0) {
+              return word.charAt(0).toUpperCase() + word.slice(1);
+            }
+            return word;
+          }
+        );
+        const wordWithoutTagsWithUpperCase =
+          wordWithoutTagsArrayWithUpperCase.join('');
+        //Make the first character of the word uppercase.
+        const wordWithoutTagsWithUpperCaseFirstChar =
+          wordWithoutTagsWithUpperCase.charAt(0).toUpperCase() +
+          wordWithoutTagsWithUpperCase.slice(1);
+
+        wordWithoutTags = wordWithoutTagsWithUpperCaseFirstChar;
+      }
 
       // : typeof import('../components/Auth/Login.vue')['default'];
       // JBadge: typeof import('../node_modules/@johnpuaoi/jptechcomponents/lib/components/Badge.vue')['default'];

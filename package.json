@@ -1,8 +1,13 @@
 {
   "name": "nuxtcomponentpopdoc",
+  "publisher": "jptech",
   "displayName": "NuxtComponentPopDoc",
   "description": "Add popup documentation for Nuxt components when hovering over them.",
   "license": "MIT",
+  "icon": "img/icon.png",
+  "sponsor": {
+    "url": "https://github.com/sponsors/johnpuaoi"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/johnpuaoi/nuxtcomponentpopdoc.git"
