@@ -15,3 +15,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
     />
     ``` 
 - Support for `<kebab-case-component></kebab-case-component>`
+
+## [1.0.1 Release]
+
+- feat: Comment template has been chagned and now can be edited with multi line support.

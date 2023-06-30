@@ -46,8 +46,9 @@
         },
         "nuxtcomponentpopdoc.commentTemplate": {
           "type": "string",
-          "default": "<!-- @PopDoc \n ### Component Name \n This is a short description of how to use the component. \n \n ### Props \n - example list of props \n \n ### Emits \n - example list of events \n \n ### Slots \n - example list of slots \n \n ### Examples \n ```vue \n<template>\n <div>Test</div> \n</template> \n ``` \n \n --> \n",
-          "description": "Template used for creating PopDoc comments."
+          "default": "<!-- @PopDoc \n # Component Name \n A description of the component, how it works, and what it's used for. Describe @important things that the user should know about the component. \n \n ## Props \n /** \n  * The `exampleProp` prop is an example of a prop that you can pass to the component. Use this format to describe the prop. \n  */ \n exampleProp?: string; \n \n ## Emits \n - exampleEmit: (value: any) => void. emitted when an example event happens \n \n ## Slots \n - example list of slots \n \n ## Examples \n ```vue \n<script lang=\"ts\" setup> \n \n</script> \n \n<template>\n <div>Test</div> \n</template> \n ``` \n \n --> \n",
+          "description": "Template used for creating PopDoc comments.",
+          "editPresentation": "multilineText"
         },
         "nuxtcomponentpopdoc.commentInsertKeys": {
           "type": "string",
